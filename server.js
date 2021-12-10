@@ -29,6 +29,8 @@ const mongoose = require('mongoose');
 mongoose.connect(CONSTANTS.MONGODB_URL);
 
 require('./users/user-service')(app);
+require('./movies/movie-service')(app);
+require('./reviews/review-service')(app);
 
 //app.listen(process.env.PORT || 4000);
 app.listen(4000);
