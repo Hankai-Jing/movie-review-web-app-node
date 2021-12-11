@@ -5,9 +5,19 @@ module.exports = (app) => {
       userDao.findAllUsers()
       .then(users => res.json(users));
 
-  const findUserById = (req, res) =>
-      userDao.findUserById(req.params.userId)
-      .then(user => res.json(user));
+  const findUserByUsername = (req, res) => {
+    console.log(req.params.username);
+    userDao.findByUsername(req.params.username)
+    .then(user => {
+      if(user) {
+        res.json(user);
+        return;
+      }
+      console.log("not found")
+      res.sendStatus(404);
+    });
+  }
+
 
   const deleteUser = (req, res) =>
       userDao.deleteUser(req.params.userId)
@@ -58,5 +68,5 @@ module.exports = (app) => {
   app.put('/api/users', updateUser);
   app.delete('/api/users/:userId', deleteUser);
   app.get('/api/users', findAllUsers);
-  app.get('/api/users/:userId', findUserById);
+  app.get('/api/profile/:username', findUserByUsername);
 };

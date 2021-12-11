@@ -11,8 +11,9 @@ const findByUsernameAndPassword = ({username, password}) =>
   userModel.findOne({username, password});
 
 
-const findByUsername = ({username}) =>
-    userModel.findOne({username});
+const findByUsername = (username) =>
+  userModel.findOne({"username": username});
+
 
 const createUser = (user) =>
     userModel.create(user);
