@@ -11,8 +11,9 @@ module.exports = (app) => {
 
   const findReviewsByImdbId = (req, res) => {
     console.log(req.params.imdbid);
-    reviewDao.findByMovieId(req.params.imdbid)
-    .then(reviews => res.json(reviews));
+    reviewDao.findByMovieId({imdbid: req.params.imdbid})
+    .then(reviews => res.json(reviews))
+    .catch(err => console.log(err));
   }
 
 

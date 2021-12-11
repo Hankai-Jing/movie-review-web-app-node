@@ -1,4 +1,5 @@
 const reviewModel = require('./review-model');
+const {ObjectId} = require('mongodb');
 
 const findAllReviews = () =>
     reviewModel.find();
@@ -9,8 +10,8 @@ const createReview = (review) =>
 const findByUsername = ({reviewerUsername}) =>
     reviewModel.find({reviewerUsername});
 
-const findByMovieId = (imdbid) =>
-    reviewModel.find(imdbid);
+const findByMovieId = ({imdbid}) =>
+    reviewModel.find({imdbid});
 
 const deleteReview = (reviewId) =>
     reviewModel.deleteOne({_id: reviewId});

@@ -27,7 +27,17 @@ module.exports = (app) => {
       movieDao.deleteAllMovies()
           .then(res.json(200));
 
+  const getMovieDetail = (req, res) => {
+    const imdbId = req.query.imdbid;
+    imdb.get({'id': imdbId}).then((data) => {
+      if (data) {
+        res.json(data);
+      }
+    }).catch(err => console.log(err));
+  }
+
   app.get('/api/movies', findAllMovies);
   app.post('/api/movies', createMovie);
   app.delete('/api/movies', deleteAll);
+  app.get('/api/details', getMovieDetail);
 };
