@@ -10,7 +10,6 @@ module.exports = (app) => {
       .then(reviews => res.json(reviews));
 
   const findReviewsByImdbId = (req, res) => {
-    console.log(req.params.imdbid);
     reviewDao.findByMovieId({imdbid: req.params.imdbid})
     .then(reviews => res.json(reviews))
     .catch(err => console.log(err));
@@ -28,6 +27,7 @@ module.exports = (app) => {
       reviewDao.deleteReview(req.params.reviewId)
           .then(status => res.send(status));
 
+  app.get('/api/reviews/all', findAllReviews);
   app.get('/api/reviews', findReviewsByUsers);
   app.get('/api/reviews/:imdbid', findReviewsByImdbId);
   app.post('/api/reviews', createReview);
