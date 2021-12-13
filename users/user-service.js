@@ -34,11 +34,12 @@ module.exports = (app) => {
 
 
   const login = (req, res) => {
-    //console.log(req.body)
+    console.log(req.body)
     userDao.findByUsernameAndPassword(req.body)
     .then(user => {
       if(user) {
         req.session['profile'] = user;
+        console.log("find")
         res.json(user);
         return;
       }
@@ -47,7 +48,7 @@ module.exports = (app) => {
   }
 
   const register = (req, res) => {
-    userDao.findByUsername(req.body)
+    userDao.findByUsername(req.body.username)
     .then(user => {
       if(user) {
         res.sendStatus(404);
@@ -55,6 +56,7 @@ module.exports = (app) => {
       }
       userDao.createUser(req.body)
       .then(user => {
+        console.log("new user")
         req.session['profile'] = user;
         res.json(user)
       });
