@@ -6,7 +6,7 @@ module.exports = (app) => {
       .then(users => res.json(users));
 
   const findUserByUsername = (req, res) => {
-    console.log(req.params.username);
+    //console.log(req.params.username);
     userDao.findByUsername(req.params.username)
     .then(user => {
       if(user) {
@@ -39,7 +39,7 @@ module.exports = (app) => {
     .then(user => {
       if(user) {
         req.session['profile'] = user;
-        console.log("find")
+        //console.log("find")
         res.json(user);
         return;
       }
